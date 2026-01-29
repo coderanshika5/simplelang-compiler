@@ -5,20 +5,12 @@
 #include "ast.h"
 
 class Parser {
-    public:
+public:
     Parser(Lexer& lexer);
     ASTNode* parseStatement();
 
-    private:
+private:
     Lexer& lexer;
-    Token current;
-
-    void next();
-    ASTNode* parseExpression();
 };
 
-
-
-#endif 
-
-
+#endif // PARSER_H
