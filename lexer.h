@@ -1,27 +1,33 @@
 #ifndef LEXER_H
-#define LEXER_h
+#define LEXER_H
 
 #include <string>
 
 enum TokenType {
-    INT, IF, IDENT, NUMBER,
-    ASSIGN, PLUS, MINUS, EQEQ,
-    LPAREN, RPAREN, LBRACE, RBRACE,
-     SEMICOLON, END
+    TOKEN_EOF,
+    TOKEN_IDENTIFIER,
+    TOKEN_NUMBER,
+    TOKEN_ASSIGN,
+    TOKEN_PLUS,
+    TOKEN_MINUS,
+    TOKEN_STAR,
+    TOKEN_SLASH,
+    TOKEN_SEMICOLON
 };
 
 struct Token {
     TokenType type;
-    std::string text;
+    std::string lexeme;
 };
 
 class Lexer {
-    public: 
-    Lexer(const std::string& src);
-    Token getNextToken();
+public:
+    Lexer(const std::string& input);
+    Token nextToken();
 
-    private:
-    std::string source;
-    int pos;
+private:
+    std::string input;
+    size_t pos;
 };
-#endif
+
+#endif // LEXER_H
