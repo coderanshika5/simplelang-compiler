@@ -1,16 +1,25 @@
-#ifndef AST_H;
+#ifndef AST_H
 #define AST_H
+
 #include <string>
+#include <memory>
 
-enum NodeType {
-    VAR_DECL, ASSIGN_STMT, IF_STMT, BIN_EXPR, NUM, VAR
+enum class ASTNodeType {
+    VAR_DECL,
+    ASSIGN,
+    BIN_OP,
+    NUMBER,
+    IDENTIFIER
 };
- struct ASTNode {
-    NodeType type;
-    std::string name;
-    int value;
-    ASTNode* left;
-    ASTNode* right;
- };
 
-#endif 
+struct ASTNode {
+    ASTNodeType type;
+    std::string value;
+    std::unique_ptr<ASTNode> left;
+    std::unique_ptr<ASTNode> right;
+
+    ASTNode(ASTNodeType t, const std::string& v = "")
+        : type(t), value(v) {}
+};
+
+#endif // AST_H
